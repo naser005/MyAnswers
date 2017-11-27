@@ -1,0 +1,41 @@
+.586
+.MODEL FLAT
+INCLUDE io.h
+.STACK 4096
+.DATA
+	prompt1		BYTE	"Enter X", 0
+	prompt2		BYTE	"Enter Y", 0
+	prompt3		BYTE	"Enter Z", 0
+	x			DWORD	40 DUP (?)
+	y			DWORD	40 DUP (?)
+	z			DWORD	40 DUP (?)
+	inp			BYTE	40 DUP (?)
+	temp		DWORD	40 DUP (?)
+	mes			BYTE	"The Result Of The Equation Is", 0
+	res			BYTE	40 DUP(?)
+.CODE
+_MainProc PROC
+	
+	input	prompt1, inp, 40
+	atod	inp
+	mov		x, eax
+	input	prompt2, inp, 40
+	atod	inp
+	mov		y, eax
+	input	prompt3, inp, 40
+	atod	inp
+	mov		z, eax
+	mov		eax, x
+	add		eax, y
+	mov		temp, eax
+	mov		eax, z
+	imul	eax, 2
+	neg		eax
+	add		eax, temp
+	inc		eax
+	neg		eax
+	dtoa	res, eax
+	output	mes, res
+		ret
+_MainProc ENDP
+END

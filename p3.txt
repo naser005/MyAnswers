@@ -1,0 +1,33 @@
+.586
+.MODEL FLAT
+INCLUDE io.h
+.STACK 4096
+.DATA
+	prompt1		BYTE	"Enter the length ", 0
+	prompt2		BYTE	"Enter the width ", 0
+	x			DWORD	40 DUP (?)
+	y			DWORD	40 DUP (?)
+	inp			BYTE	40 DUP (?)
+	temp		DWORD	40 DUP (?)
+	mes			BYTE	"The Result Of The Equation Is", 0
+	res			BYTE	40 DUP(?)
+.CODE
+_MainProc PROC
+	
+	input	prompt1, inp, 40
+	atod	inp
+	mov		x, eax
+	input	prompt2, inp, 40
+	atod	inp
+	mov		y, eax
+	mov		eax, x
+	imul	eax, 2
+	mov		temp, eax
+	mov		eax, y
+	imul	eax, 2
+	add		eax, temp
+	dtoa	res, eax
+	output	mes, res
+		ret
+_MainProc ENDP
+END

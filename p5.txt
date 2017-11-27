@@ -1,0 +1,53 @@
+.586
+.MODEL FLAT
+INCLUDE io.h
+.STACK 4096
+.DATA
+	prompt1		BYTE	"Enter the first grade   ", 0
+	prompt2		BYTE	"Enter the second grade  ", 0
+	prompt3		BYTE	"Enter the third grade   ", 0
+	prompt4		BYTE	"Enter the fourth grade  ", 0
+	x			DWORD	40 DUP (?)
+	y			DWORD	40 DUP (?)
+	z			DWORD	40 DUP (?)
+	w			DWORD	40 DUP (?) 
+	inp			BYTE	40 DUP (?)
+	mes			BYTE	"The sum is", 0
+	mes2	                BYTE	"The average is", 0
+	res			BYTE	40 DUP(?)
+        R                     BYTE "The Reminder  " , 0
+.CODE
+_MainProc PROC
+	
+	input	prompt1, inp, 40
+	atod	inp
+	mov		x, eax
+	input	prompt2, inp, 40
+	atod	inp
+	mov		y, eax
+	input	prompt3, inp, 40
+	atod	inp
+	mov		z, eax
+	input	prompt4, inp, 40
+	atod	inp
+	mov		w, eax
+
+	mov		eax, x
+	add		eax, y
+	add		eax, z
+	add		eax, w
+	dtoa	res, eax
+	output	mes, res
+
+           mov edx , 0
+	   mov ecx , 4
+	   div ecx
+	  dtoa res , eax
+	output	mes2, res
+	  dtoa res , edx
+	  output R , res
+
+	mov eax , 0
+		ret
+_MainProc ENDP
+END
